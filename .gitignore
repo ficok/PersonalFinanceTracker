@@ -1,2 +1,4 @@
 # Ignore folders:
 .vs/
+PersonalFinanceTracker/bin/
+PersonalFinanceTracker/obj/
