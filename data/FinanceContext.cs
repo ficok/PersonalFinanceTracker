@@ -14,8 +14,9 @@ namespace PersonalFinanceTracker.data
         {
         }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<RecurringTransaction> RecurringTransactions { get; set; }
+        //public DbSet<Account> Accounts { get; set; }
+        //public DbSet<Transaction> Transactions { get; set; }
+        //public DbSet<RecurringTransaction> RecurringTransactions { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

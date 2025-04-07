@@ -55,10 +55,15 @@ namespace PersonalFinanceTracker
             if (!isConnected)
             {
                 MessageBox.Show("Failed to connect to the database. Exiting application",
-                    "Database Connection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Database Connection Status", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 Shutdown();
                 return;
+            }
+            else
+            {
+                MessageBox.Show("Sucessfully connected to the database.",
+                    "Database Connection Status", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
