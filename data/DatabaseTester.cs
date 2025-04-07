@@ -16,7 +16,7 @@ namespace PersonalFinanceTracker.data
             context_ = context;
         }
 
-        public async Task TestConnectionAsync()
+        public async Task<bool> TestConnectionAsync()
         {
             bool connection = await context_.Database.CanConnectAsync();
             if (connection)
@@ -27,6 +27,8 @@ namespace PersonalFinanceTracker.data
             {
                 Console.WriteLine("Failed to connect to the database");
             }
+
+            return connection;
         }
     }
 }

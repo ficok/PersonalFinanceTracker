@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using PersonalFinanceTracker.data;
+using PersonalFinanceTracker.ui;
 
 namespace PersonalFinanceTracker
 {
