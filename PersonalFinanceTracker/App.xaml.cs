@@ -8,7 +8,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using PersonalFinanceTracker.data;
+using PersonalFinanceTracker.data.repositories;
 using PersonalFinanceTracker.ui;
+using PersonalFinanceTracker.data.context;
+using System.CodeDom;
+using PersonalFinanceTracker.data.interfaces;
 
 namespace PersonalFinanceTracker
 {
@@ -29,11 +33,11 @@ namespace PersonalFinanceTracker
                 .ConfigureServices((context, services) =>
                 {
                     // Register DbContext with PostgreSQL using the connection string from appsettings.json
-                    services.AddDbContext<FinanceContext>(options =>
+                    services.AddDbContext<Database>(options =>
                         options.UseNpgsql(context.Configuration.GetConnectionString("DefaultConnection")));
 
-                    // Register your repository or any other services
-                    services.AddTransient<FinanceRepository>();
+                    // Register repositories with the same scope as the database context
+                    services.AddScoped(typeof(IQuerier<>), typeof(Querier<>));
 
                     // Register the DatabaseTester service for connection testing
                     services.AddTransient<DatabaseTester>();

@@ -20,7 +20,7 @@ namespace PersonalFinanceTracker.models
         [Column("transacrion_type")] public string TransactionType { get; set; }
         [Column("related_transaction_id")] public Guid? RelatedTransactionId { get; set; }
         [Column("created_at")] public DateTime CreatedAt { get; set; }
-        [ForeignKey("AccoundId")] public Account Account { get; set; }
+        [ForeignKey("AccountId")] public Account Account { get; set; }
         [ForeignKey("CategoryId")] public Category Category { get; set; }
         [ForeignKey("RelatedTransactionId")] public Transaction RelatedTransaction { get; set; }
 

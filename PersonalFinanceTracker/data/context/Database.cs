@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceTracker.models;
 
-namespace PersonalFinanceTracker.data
+namespace PersonalFinanceTracker.data.context
 {
-    public class FinanceContext: DbContext
+    /** This is the database context - it maintains a connection to the real database.
+     *  Each DbSet represents a table in the database.
+     *  Queries that are sent through the IQuerier implementing object retrieve data
+     *  through this context.
+     */
+    public class Database: DbContext
     {
-        public FinanceContext(DbContextOptions<FinanceContext> options) : base(options)
+        public Database(DbContextOptions<Database> options) : base(options)
         {
         }
 
