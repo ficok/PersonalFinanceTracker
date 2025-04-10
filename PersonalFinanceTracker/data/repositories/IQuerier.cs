@@ -13,6 +13,10 @@ namespace PersonalFinanceTracker.Data.Repositories
      */
     public interface IQuerier<T> where T: class
     {
+        /** How to use the orderby:
+         * Query(query, q => q.OrderBy(t => t.TransactionDate));
+         * Query(query, q => q.OrderByDescending(t => t.TransactionDate));
+         */
         IEnumerable<T> All(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
         IEnumerable<T> Query(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
         Task<IEnumerable<T>> AllAsync(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);

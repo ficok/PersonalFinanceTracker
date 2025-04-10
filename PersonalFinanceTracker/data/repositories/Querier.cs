@@ -26,14 +26,25 @@ namespace PersonalFinanceTracker.Data.Repositories
             db_ = db;
         }
         /** Return all records from the table with no conditions applied. */
-        public IEnumerable<T> All()
+        public IEnumerable<T> All(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
         {
-            return db_.Set<T>().ToList();
+            IQueryable<T> query = db_.Set<T>();
+            if (orderby != null)
+            {
+                query = orderby(query);
+            }
+            return query.ToList();
         }
 
-        public async Task<IEnumerable<T>> AllAsync()
+        public async Task<IEnumerable<T>> AllAsync(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
         {
-            return await db_.Set<T>().ToListAsync();
+            IQueryable<T> query = db_.Set<T>();
+            if (orderby != null)
+            {
+                query = orderby(query);
+            }
+
+            return await query.ToListAsync();
         }
 
         /** Given the object that implements IQuery with type T (Transaction, Account...)
@@ -42,7 +53,7 @@ namespace PersonalFinanceTracker.Data.Repositories
          *  It returns an object that implements IEnumerable, containing all records from the
          *  database that the query had found.
          */
-        public IEnumerable<T> Query(IQuery<T> query)
+        public IEnumerable<T> Query(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
         {
             IQueryable<T> table = db_.Set<T>();
             if (query.Condition != null)
@@ -53,12 +64,17 @@ namespace PersonalFinanceTracker.Data.Repositories
             foreach (var include in query.Includes)
             {
                 table = table.Include(include);
+            }
+
+            if (orderby != null)
+            {
+                table = orderby(table);
             }
 
             return table.ToList();
         }
 
-        public async Task<IEnumerable<T>> QueryAsync(IQuery<T> query)
+        public async Task<IEnumerable<T>> QueryAsync(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
         {
             IQueryable<T> table = db_.Set<T>();
             if (query.Condition != null)
@@ -69,6 +85,11 @@ namespace PersonalFinanceTracker.Data.Repositories
             foreach (var include in query.Includes)
             {
                 table = table.Include(include);
+            }
+
+            if (orderby != null)
+            {
+                table = orderby(table);
             }
 
             return await table.ToListAsync();
