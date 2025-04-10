@@ -13,10 +13,10 @@ namespace PersonalFinanceTracker.Data.Repositories
      */
     public interface IQuerier<T> where T: class
     {
-        IEnumerable<T> All();
-        IEnumerable<T> Query(IQuery<T> query);
-        Task<IEnumerable<T>> AllAsync();
-        Task<IEnumerable<T>> QueryAsync(IQuery<T> query);
+        IEnumerable<T> All(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
+        IEnumerable<T> Query(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
+        Task<IEnumerable<T>> AllAsync(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
+        Task<IEnumerable<T>> QueryAsync(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
 
         /** Future: other CRUD methods, both sync and async
          *  Adding data
