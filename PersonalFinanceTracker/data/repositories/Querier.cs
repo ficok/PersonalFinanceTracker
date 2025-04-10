@@ -30,6 +30,12 @@ namespace PersonalFinanceTracker.Data.Repositories
         {
             return db_.Set<T>().ToList();
         }
+
+        public async Task<IEnumerable<T>> AllAsync()
+        {
+            return await db_.Set<T>().ToListAsync();
+        }
+
         /** Given the object that implements IQuery with type T (Transaction, Account...)
          *  apply the condition in that query object, apply the includes and execute the query
          *  via EF Core.
@@ -50,6 +56,22 @@ namespace PersonalFinanceTracker.Data.Repositories
             }
 
             return table.ToList();
+        }
+
+        public async Task<IEnumerable<T>> QueryAsync(IQuery<T> query)
+        {
+            IQueryable<T> table = db_.Set<T>();
+            if (query.Condition != null)
+            {
+                table = table.Where(query.Condition);
+            }
+
+            foreach (var include in query.Includes)
+            {
+                table = table.Include(include);
+            }
+
+            return await table.ToListAsync();
         }
     }
 }
