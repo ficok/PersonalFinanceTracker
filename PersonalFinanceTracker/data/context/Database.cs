@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PersonalFinanceTracker.models;
+using PersonalFinanceTracker.Models;
 
-namespace PersonalFinanceTracker.data.context
+namespace PersonalFinanceTracker.Data.Context
 {
     /** This is the database context - it maintains a connection to the real database.
      *  Each DbSet represents a table in the database.

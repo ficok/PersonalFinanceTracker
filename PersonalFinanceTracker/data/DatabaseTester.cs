@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PersonalFinanceTracker.data.context;
+using PersonalFinanceTracker.Data.Context;
 
-namespace PersonalFinanceTracker.data
+namespace PersonalFinanceTracker.Data
 {
     /** This class is used to test the connection to the database.
      *  So far, it is used in startup logic in the beginning of the development

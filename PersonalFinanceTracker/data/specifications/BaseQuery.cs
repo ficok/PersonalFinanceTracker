@@ -4,9 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using PersonalFinanceTracker.data.interfaces;
 
-namespace PersonalFinanceTracker.data.specifications
+namespace PersonalFinanceTracker.Data.Specifications
 {
     /** This is a base Query class - an abstract class. It is a template for the 
      *  actual queries that shows how they should implement the IQuery interface.

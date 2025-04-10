@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PersonalFinanceTracker.models;
 
-namespace PersonalFinanceTracker.data.specifications
+namespace PersonalFinanceTracker.Data.Specifications
 {
     /** This class is an implementation of the IQuery interface.
      *  It represents one query that the business logic can execute on the database.

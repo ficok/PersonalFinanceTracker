@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PersonalFinanceTracker.data.interfaces;
-using PersonalFinanceTracker.data.context;
+using PersonalFinanceTracker.Data.Context;
+using PersonalFinanceTracker.Data.Specifications;
 
-namespace PersonalFinanceTracker.data.repositories
+namespace PersonalFinanceTracker.Data.Repositories
 {
     /**
      * This Querier is following the REPOSITORY pattern.

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonalFinanceTracker.models
+namespace PersonalFinanceTracker.Models
 {
     [Table("transactions")]
     public class Transaction

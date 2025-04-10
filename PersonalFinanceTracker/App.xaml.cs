@@ -7,12 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using PersonalFinanceTracker.data;
-using PersonalFinanceTracker.data.repositories;
-using PersonalFinanceTracker.ui;
-using PersonalFinanceTracker.data.context;
+using PersonalFinanceTracker.Data;
+using PersonalFinanceTracker.Data.Repositories;
+using PersonalFinanceTracker.UI;
+using PersonalFinanceTracker.Data.Context;
+using PersonalFinanceTracker.Data.UnitOfWork;
 using System.CodeDom;
-using PersonalFinanceTracker.data.interfaces;
 
 namespace PersonalFinanceTracker
 {
@@ -36,8 +36,11 @@ namespace PersonalFinanceTracker
                     services.AddDbContext<Database>(options =>
                         options.UseNpgsql(context.Configuration.GetConnectionString("DefaultConnection")));
 
-                    // Register repositories with the same scope as the database context
+                    // Register repositories with the same scope as the database 
                     services.AddScoped(typeof(IQuerier<>), typeof(Querier<>));
+
+                    // Register the unit of work dependency
+                    services.AddScoped<IUnitOfWork, UnitOfWork>();
 
                     // Register the DatabaseTester service for connection testing
                     services.AddTransient<DatabaseTester>();
