@@ -28,8 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="logic\" />
-	<Folder Include="ui\" />
+    <Folder Include="Logic\" />
+	<Folder Include="UI\" />
+	  <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
