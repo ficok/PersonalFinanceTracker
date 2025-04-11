@@ -13,12 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 
 namespace PersonalFinanceTracker.Tests.UnitTests
 {
-    public class RepositoryTests
+    public class RepositoryTests: TestBase
     {
-        // Helper method: create unique in-memory database operations per test
-        private DbContextOptions<Database> GetInMemoryOptions(string dbName) => new DbContextOptionsBuilder<Database>()
-            .UseInMemoryDatabase(databaseName: dbName)
-            .Options;
         [Fact]
         public void AllMethod_ReturnsAllRecords()
         {

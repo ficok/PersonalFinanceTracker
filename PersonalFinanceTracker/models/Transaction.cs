@@ -17,7 +17,7 @@ namespace PersonalFinanceTracker.Models
         [Column("amount")] public decimal Amount { get; set; }
         [Column("description")] public string? Description { get; set; }
         [Column("transaction_date")] public DateTime TransactionDate { get; set; }
-        [Column("transacrion_type")] public string TransactionType { get; set; }
+        [Column("transaction_type")] public string TransactionType { get; set; }
         [Column("related_transaction_id")] public Guid? RelatedTransactionId { get; set; }
         [Column("created_at")] public DateTime CreatedAt { get; set; }
         [ForeignKey("AccountId")] public Account Account { get; set; }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Xunit;
 using PersonalFinanceTracker.Models;
 using PersonalFinanceTracker.Data.Specifications;
+using PersonalFinanceTracker.Tests;
 
 namespace PersonalFinanceTracker.Tests.UnitTests
 {
-    public class QueryTests
+    public class QueryTests: TestBase
     {
         [Fact]
         public void AllTransactions_Query_HasNonNullCondition()
