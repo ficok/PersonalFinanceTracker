@@ -29,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logic\" />
+    <Folder Include="Services\CoreServices\" />
+    <Folder Include="Services\AnalyticsServices\" />
 	<Folder Include="UI\" />
 	<Folder Include="Models\" />
   </ItemGroup>

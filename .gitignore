@@ -2,3 +2,5 @@
 .vs/
 PersonalFinanceTracker/bin/
 PersonalFinanceTracker/obj/
+PersonalFinanceTracker.Tests/bin/
+PersonalFinanceTracker.Tests/obj/

@@ -1,6 +1,0 @@
-C:\Users\ficko\source\repos\PersonalFinanceTracker\PersonalFinanceTracker.Tests\obj\Debug\net8.0\PersonalFinanceTracker.Tests.csproj.AssemblyReference.cache
-C:\Users\ficko\source\repos\PersonalFinanceTracker\PersonalFinanceTracker.Tests\obj\Debug\net8.0\PersonalFinanceTracker.Tests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ficko\source\repos\PersonalFinanceTracker\PersonalFinanceTracker.Tests\obj\Debug\net8.0\PersonalFinanceTracker.Tests.AssemblyInfoInputs.cache
-C:\Users\ficko\source\repos\PersonalFinanceTracker\PersonalFinanceTracker.Tests\obj\Debug\net8.0\PersonalFinanceTracker.Tests.AssemblyInfo.cs
-C:\Users\ficko\source\repos\PersonalFinanceTracker\PersonalFinanceTracker.Tests\obj\Debug\net8.0\PersonalFinanceTracker.Tests.csproj.CoreCompileInputs.cache
-C:\Users\ficko\source\repos\PersonalFinanceTracker\PersonalFinanceTracker.Tests\obj\Debug\net8.0\PersonalFinanceTracker.Tests.sourcelink.json
