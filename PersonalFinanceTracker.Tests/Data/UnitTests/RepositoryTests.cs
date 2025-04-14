@@ -11,7 +11,7 @@ using PersonalFinanceTracker.Data.Specifications;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 
-namespace PersonalFinanceTracker.Tests.UnitTests
+namespace PersonalFinanceTracker.Tests.Data.UnitTests
 {
     public class RepositoryTests: TestBase
     {

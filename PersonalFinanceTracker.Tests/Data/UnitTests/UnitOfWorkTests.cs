@@ -11,7 +11,7 @@ using PersonalFinanceTracker.Data.Specifications;
 using PersonalFinanceTracker.Data.UnitOfWork;
 using PersonalFinanceTracker.Models;
 
-namespace PersonalFinanceTracker.Tests.UnitTests
+namespace PersonalFinanceTracker.Tests.Data.UnitTests
 {
     public class UnitOfWorkTests: TestBase
     {

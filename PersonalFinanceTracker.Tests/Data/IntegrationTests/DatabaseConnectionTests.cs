@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceTracker.Data.Context;
 
-namespace PersonalFinanceTracker.Tests.IntegrationTests
+namespace PersonalFinanceTracker.Tests.Data.IntegrationTests
 {
     public class DatabaseConnectionTests: TestBase
     {

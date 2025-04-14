@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using Xunit;
 using PersonalFinanceTracker.Models;
 using PersonalFinanceTracker.Data.Specifications;
-using PersonalFinanceTracker.Tests;
 
-namespace PersonalFinanceTracker.Tests.UnitTests
+namespace PersonalFinanceTracker.Tests.Data.UnitTests
 {
     public class QueryTests: TestBase
     {

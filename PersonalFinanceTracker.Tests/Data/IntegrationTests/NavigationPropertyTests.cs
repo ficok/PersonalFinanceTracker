@@ -8,7 +8,7 @@ using PersonalFinanceTracker.Data.Context;
 using PersonalFinanceTracker.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace PersonalFinanceTracker.Tests.IntegrationTests
+namespace PersonalFinanceTracker.Tests.Data.IntegrationTests
 {
     public class NavigationPropertyTests: TestBase
     {
