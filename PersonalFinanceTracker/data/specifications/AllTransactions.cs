@@ -14,13 +14,13 @@ namespace PersonalFinanceTracker.Data.Specifications
      *  specifying the conditions for the query to filer the records and the includes
      *  for populating the navigational properties with associated data.
      */
-    public class AllTransactions: BaseQuery<Transaction>
+    public class AllTransactions: Query<Transaction>
     {
-        // No conditions - get all transactions
-        public override Expression<Func<Transaction, bool>> Condition => t => true;
-        // Get data about each record's associated category and account data
         public AllTransactions()
         {
+            // No conditions - get all transactions
+            AddCondition(t => true);
+            // Get data about each record's associated category and account data
             AddInclude(t => t.Category);
             AddInclude(t => t.Account);
         }

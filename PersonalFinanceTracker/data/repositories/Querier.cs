@@ -56,9 +56,10 @@ namespace PersonalFinanceTracker.Data.Repositories
         public IEnumerable<T> Query(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
         {
             IQueryable<T> table = db_.Set<T>();
-            if (query.Condition != null)
+            if (query.Conditions.Count > 0)
             {
-                table = table.Where(query.Condition);
+                foreach (var condition in query.Conditions)
+                    table = table.Where(condition);
             }
 
             foreach (var include in query.Includes)
@@ -77,9 +78,10 @@ namespace PersonalFinanceTracker.Data.Repositories
         public async Task<IEnumerable<T>> QueryAsync(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
         {
             IQueryable<T> table = db_.Set<T>();
-            if (query.Condition != null)
+            if (query.Conditions.Count > 0)
             {
-                table = table.Where(query.Condition);
+                foreach (var condition in query.Conditions)
+                    table = table.Where(condition);
             }
 
             foreach (var include in query.Includes)

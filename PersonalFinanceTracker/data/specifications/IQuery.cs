@@ -18,7 +18,7 @@ namespace PersonalFinanceTracker.Data.Specifications
     public interface IQuery<T>
     {
         // The contitions that the entity must satisfy
-        Expression<Func<T, bool>> Condition { get; }
+        List<Expression<Func<T, bool>>> Conditions { get; }
         // Collection of eagerly-loaded navigation properties
         List<Expression<Func<T, object>>> Includes { get; }
     }
