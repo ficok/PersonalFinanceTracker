@@ -52,9 +52,9 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         }
 
         [Fact]
-        public async Task AllSynchMethod_ReturnsAllRecords()
+        public async Task AllAsynchMethod_ReturnsAllRecords()
         {
-            var options = GetInMemoryOptions(nameof(AllSynchMethod_ReturnsAllRecords));
+            var options = GetInMemoryOptions(nameof(AllAsynchMethod_ReturnsAllRecords));
             using (var context = new Database(options))
             {
                 context.Transactions.Add(new Transaction
@@ -87,11 +87,14 @@ namespace PersonalFinanceTracker.Tests.UnitTests
             }
         }
 
-        private class MinAmount: BaseQuery<Transaction>
+        private class MinAmount: Query<Transaction>
         {
             private readonly decimal amount_;
-            public MinAmount(decimal amount) { this.amount_ = amount; }
-            public override Expression<Func<Transaction, bool>> Condition => t => t.Amount >= amount_;
+            public MinAmount(decimal amount) { 
+                amount_ = amount;
+                AddCondition(t => t.Amount >= amount_);
+            }
+            
         }
 
         [Fact]
@@ -273,9 +276,9 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         }
 
         [Fact]
-        public void AddMethod_AddsRecords()
+        public void Querier_AddMethod_AddsRecords()
         {
-            var options = GetInMemoryOptions(nameof(AddMethod_AddsRecords));
+            var options = GetInMemoryOptions(nameof(Querier_AddMethod_AddsRecords));
             using (var context = new Database(options))
             {
                 var querier = new Querier<Transaction>(context);
@@ -305,9 +308,9 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         }
 
         [Fact]
-        public async void AddAsyncMethod_AddsRecords()
+        public async void Querier_AddAsyncMethod_AddsRecords()
         {
-            var options = GetInMemoryOptions(nameof(AddAsyncMethod_AddsRecords));
+            var options = GetInMemoryOptions(nameof(Querier_AddAsyncMethod_AddsRecords));
             using (var context = new Database(options))
             {
                 var querier = new Querier<Transaction>(context);
@@ -323,7 +326,8 @@ namespace PersonalFinanceTracker.Tests.UnitTests
                 };
 
                 await querier.AddAsync(transaction);
-                await context.SaveChangesAsync();
+                context.SaveChanges();
+                Assert.Equal(1, context.Transactions.Count());
             }
 
             using (var context = new Database(options))
@@ -335,17 +339,19 @@ namespace PersonalFinanceTracker.Tests.UnitTests
             }
         }
 
-        private class ExactAmount: BaseQuery<Transaction>
+        private class ExactAmount: Query<Transaction>
         {
             private readonly decimal amount_;
-            public ExactAmount(decimal amount) { amount_ = amount; }
-            public override Expression<Func<Transaction, bool>> Condition => t => t.Amount == amount_;
+            public ExactAmount(decimal amount) { 
+                amount_ = amount;
+                AddCondition(t => t.Amount == amount_);
+            }
         }
 
         [Fact]
-        public void DeleteMethod_DeletesRecords()
+        public void Querier_DeleteMethod_DeletesRecords()
         {
-            var options = GetInMemoryOptions(nameof(DeleteMethod_DeletesRecords));
+            var options = GetInMemoryOptions(nameof(Querier_DeleteMethod_DeletesRecords));
             using (var context = new Database(options))
             {
                 var t1 = new Transaction
@@ -382,6 +388,7 @@ namespace PersonalFinanceTracker.Tests.UnitTests
                 Assert.Equal(100, t1.Amount);
                 querier.Delete(t1);
                 context.SaveChanges();
+                Assert.Equal(1, context.Transactions.Count());
             }
 
             using (var context = new Database(options))

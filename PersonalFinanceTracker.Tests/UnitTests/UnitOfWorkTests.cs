@@ -71,9 +71,9 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         }
 
         [Fact]
-        public async Task AddMethod_AddsRecords()
+        public async Task UnitOfWork_AddMethod_AddsRecords()
         {
-            var options = GetInMemoryOptions(nameof(AddMethod_AddsRecords));
+            var options = GetInMemoryOptions(nameof(UnitOfWork_AddMethod_AddsRecords));
             using (var context = new Database(options))
             {
                 var uow = new UnitOfWork(context);
@@ -96,9 +96,9 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         }
 
         [Fact]
-        public async Task AddAsyncMethod_AddsRecords()
+        public async Task UnitOfWork_AddAsyncMethod_AddsRecords()
         {
-            var options = GetInMemoryOptions(nameof(AddAsyncMethod_AddsRecords));
+            var options = GetInMemoryOptions(nameof(UnitOfWork_AddAsyncMethod_AddsRecords));
             using (var context = new Database(options))
             {
                 var uow = new UnitOfWork(context);
@@ -119,17 +119,20 @@ namespace PersonalFinanceTracker.Tests.UnitTests
                 Assert.Equal(1, transactionCount);
             }
         }
-        private class ExactAmount : BaseQuery<Transaction>
+        private class ExactAmount : Query<Transaction>
         {
             private readonly decimal amount_;
-            public ExactAmount(decimal amount) { amount_ = amount; }
-            public override Expression<Func<Transaction, bool>> Condition => t => t.Amount == amount_;
+            public ExactAmount(decimal amount)
+            {
+                amount_ = amount;
+                AddCondition(t => t.Amount == amount_);
+            }
         }
 
         [Fact]
-        public async Task DeleteMethod_DeletesRecords()
+        public async Task UnitOfWork_DeleteMethod_DeletesRecords()
         {
-            var options = GetInMemoryOptions(nameof(DeleteMethod_DeletesRecords));
+            var options = GetInMemoryOptions(nameof(UnitOfWork_DeleteMethod_DeletesRecords));
             using (var context = new Database(options))
             {
                 context.Transactions.Add(new Transaction

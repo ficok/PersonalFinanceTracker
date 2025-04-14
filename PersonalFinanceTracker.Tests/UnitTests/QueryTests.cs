@@ -17,7 +17,7 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         {
             // Create a new instance of the AllTransactions query:
             var query = new AllTransactions();
-            Assert.NotNull(query.Condition);
+            Assert.NotNull(query.Conditions.First());
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace PersonalFinanceTracker.Tests.UnitTests
         {
             var query = new AllTransactions();
             var testTransaction = new Transaction();
-            var conditionDelegate = query.Condition.Compile();
+            var conditionDelegate = query.Conditions.First().Compile();
             bool result = conditionDelegate(testTransaction);
             Assert.True(result);
         }
