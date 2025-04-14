@@ -271,5 +271,126 @@ namespace PersonalFinanceTracker.Tests.UnitTests
                 Assert.Equal(50, transactions.First().Amount);
             }
         }
+
+        [Fact]
+        public void AddMethod_AddsRecords()
+        {
+            var options = GetInMemoryOptions(nameof(AddMethod_AddsRecords));
+            using (var context = new Database(options))
+            {
+                var querier = new Querier<Transaction>(context);
+                var transaction = new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Amount = 100,
+                    AccountId = Guid.NewGuid(),
+                    CategoryId = null,
+                    TransactionDate = DateTime.Now,
+                    TransactionType = "Expense",
+                    CreatedAt = DateTime.Now
+
+                };
+
+                querier.Add(transaction);
+                context.SaveChanges();
+            }
+
+            using (var context = new Database(options))
+            {
+                var querier = new Querier<Transaction>(context);
+                var transactions = querier.All().ToList();
+
+                Assert.Single(transactions);
+            }
+        }
+
+        [Fact]
+        public async void AddAsyncMethod_AddsRecords()
+        {
+            var options = GetInMemoryOptions(nameof(AddAsyncMethod_AddsRecords));
+            using (var context = new Database(options))
+            {
+                var querier = new Querier<Transaction>(context);
+                var transaction = new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Amount = 100,
+                    AccountId = Guid.NewGuid(),
+                    CategoryId = null,
+                    TransactionDate = DateTime.Now,
+                    TransactionType = "Expense",
+                    CreatedAt = DateTime.Now
+                };
+
+                await querier.AddAsync(transaction);
+                await context.SaveChangesAsync();
+            }
+
+            using (var context = new Database(options))
+            {
+                var querier = new Querier<Transaction>(context);
+                var transaction = (await querier.AllAsync()).ToList();
+
+                Assert.Single(transaction);
+            }
+        }
+
+        private class ExactAmount: BaseQuery<Transaction>
+        {
+            private readonly decimal amount_;
+            public ExactAmount(decimal amount) { amount_ = amount; }
+            public override Expression<Func<Transaction, bool>> Condition => t => t.Amount == amount_;
+        }
+
+        [Fact]
+        public void DeleteMethod_DeletesRecords()
+        {
+            var options = GetInMemoryOptions(nameof(DeleteMethod_DeletesRecords));
+            using (var context = new Database(options))
+            {
+                var t1 = new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Amount = 100,
+                    AccountId = Guid.NewGuid(),
+                    CategoryId = null,
+                    TransactionDate = DateTime.Now,
+                    TransactionType = "Income",
+                    CreatedAt = DateTime.Now
+                };
+
+                var t2 = new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Amount = 200,
+                    AccountId = Guid.NewGuid(),
+                    CategoryId = null,
+                    TransactionDate = DateTime.Now,
+                    TransactionType = "Expense",
+                    CreatedAt = DateTime.Now
+                };
+
+                context.Transactions.Add(t1);
+                context.Transactions.Add(t2);
+                context.SaveChanges();
+            }
+
+            using (var context = new Database(options))
+            {
+                var querier = new Querier<Transaction>(context);
+                var t1 = querier.Query(new ExactAmount(100)).ToList().First();
+                Assert.Equal(100, t1.Amount);
+                querier.Delete(t1);
+                context.SaveChanges();
+            }
+
+            using (var context = new Database(options))
+            {
+                var querier = new Querier<Transaction>(context);
+                var transactions = querier.All().ToList();
+                Assert.Single(transactions);
+                Assert.Equal(200, transactions.First().Amount);
+            }
+        }
     }
 }

@@ -14,20 +14,39 @@ namespace PersonalFinanceTracker.Data.UnitOfWork
     {
         private readonly Database db_;
 
-        public IQuerier<Account> Accounts { get; }
-        public IQuerier<Transaction> Transactions { get; }
-        public IQuerier<RecurringTransaction> RecurringTransactions { get; }
-        public IQuerier<Category> Categories { get; }
+        private readonly Dictionary<Type, object> queriers_ = new();
 
         public UnitOfWork(Database db)
         {
             db_ = db;
-
-            Accounts = new Querier<Account>(db_);
-            Transactions = new Querier<Transaction>(db_);
-            RecurringTransactions = new Querier<RecurringTransaction>(db_);
-            Categories = new Querier<Category>(db_);
         }
+
+        public IQuerier<T> GetQuerier<T>() where T: class
+        {
+            var type = typeof(T);
+            if (!queriers_.ContainsKey(type))
+            {
+                queriers_[type] = new Querier<T>(db_);
+            }
+
+            return (IQuerier<T>)queriers_[type];
+        }
+
+        public void Add<T>(T record) where T: class
+        {
+            GetQuerier<T>().Add(record);
+        }
+
+        public async Task AddAsync<T>(T record) where T: class
+        {
+            await GetQuerier<T>().AddAsync(record);
+        }
+
+        public void Delete<T>(T record) where T: class
+        {
+            GetQuerier<T>().Delete(record);
+        }
+
 
         public async Task<int> CommitAsync()
         {

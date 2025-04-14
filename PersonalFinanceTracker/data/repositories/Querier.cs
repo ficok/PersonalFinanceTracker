@@ -94,5 +94,18 @@ namespace PersonalFinanceTracker.Data.Repositories
 
             return await table.ToListAsync();
         }
+
+        public void Add(T record)
+        {
+            db_.Set<T>().Add(record);
+        }
+        public async Task AddAsync(T record)
+        {
+            await db_.Set<T>().AddAsync(record);
+        }
+        public void Delete(T record)
+        {
+            db_.Set<T>().Remove(record);
+        }
     }
 }

@@ -21,6 +21,9 @@ namespace PersonalFinanceTracker.Data.Repositories
         IEnumerable<T> Query(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
         Task<IEnumerable<T>> AllAsync(Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
         Task<IEnumerable<T>> QueryAsync(IQuery<T> query, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null);
+        void Add(T record);
+        Task AddAsync(T record);
+        void Delete(T record);
 
         /** Future: other CRUD methods, both sync and async
          *  Adding data
