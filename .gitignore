@@ -4,3 +4,6 @@ PersonalFinanceTracker/bin/
 PersonalFinanceTracker/obj/
 PersonalFinanceTracker.Tests/bin/
 PersonalFinanceTracker.Tests/obj/
+
+# Ignore files:
+PersonalFinanceTracker/appsettings.json
